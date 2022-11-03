@@ -1,8 +1,0 @@
-PASS	Basic Statistics	stdin
-PASS	Per base sequence content	stdin
-PASS	Per sequence GC content	stdin
-PASS	Per base N content	stdin
-PASS	Sequence Length Distribution	stdin
-PASS	Sequence Duplication Levels	stdin
-PASS	Overrepresented sequences	stdin
-WARN	Adapter Content	stdin
