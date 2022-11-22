@@ -1,0 +1,15 @@
+Status	/data/users/rportmann/rnaseq/samtools/HER21_sorted.bam	/data/users/rportmann/rnaseq/samtools/HER22_sorted.bam	/data/users/rportmann/rnaseq/samtools/HER23_sorted.bam	/data/users/rportmann/rnaseq/samtools/NonTNBC1_sorted.bam	/data/users/rportmann/rnaseq/samtools/NonTNBC2_sorted.bam	/data/users/rportmann/rnaseq/samtools/NonTNBC3_sorted.bam	/data/users/rportmann/rnaseq/samtools/Normal1_sorted.bam	/data/users/rportmann/rnaseq/samtools/Normal2_sorted.bam	/data/users/rportmann/rnaseq/samtools/Normal3_sorted.bam	/data/users/rportmann/rnaseq/samtools/TNBC1_sorted.bam	/data/users/rportmann/rnaseq/samtools/TNBC2_sorted.bam	/data/users/rportmann/rnaseq/samtools/TNBC3_sorted.bam
+Assigned	10914836	15401627	10984449	20655129	11607246	12451490	12393175	26406724	31491802	10913761	9015757	9765423
+Unassigned_Unmapped	2305747	1606261	893149	2724579	2326049	2496441	164902	382538	346312	1577347	2200810	2664888
+Unassigned_Read_Type	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_MappingQuality	1934715	3380414	1225124	1537386	1457532	1781677	41225	65097	55665	944078	1626306	1898338
+Unassigned_Chimera	2824260	3946357	3193606	9436103	7668768	8512857	259934	594872	520773	8873535	10405815	13694981
+Unassigned_FragmentLength	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_MultiMapping	241288493	238050010	206633308	190937024	179820208	192689362	5732709	9489158	6889434	118871619	185220863	183198672
+Unassigned_Secondary	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_NoFeatures	14210275	17020294	11427211	9134192	10167135	10715268	828076	2106853	1388140	13052896	7040506	7338735
+Unassigned_Overlapping_Length	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Ambiguity	1529403	1821229	1558747	2886028	1596056	1694774	1030249	1819326	2033640	1124811	1108031	1018195
