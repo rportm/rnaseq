@@ -1,0 +1,104 @@
+---
+title: "DESeq2 analysis"
+output: html_document
+date: '2022-11-22'
+---
+
+## loading and creating a DESeq2 object for further analysis
+```{r echo=T, results='hide', error = FALSE, warning=FALSE, message=FALSE}
+library(DESeq2)
+library(dplyr)
+#feature_counts = read.delim("C:/Users/rp22o119/OneDrive/rna seq course/feature_counts.txt", header=TRUE, comment.char="#")
+feature_counts = read.delim("C:/Users/robin/OneDrive/rna seq course/feature_counts.txt", header=FALSE, comment.char="#")
+
+#drop columns not needed to create DESeq2 object
+feature_counts = feature_counts %>%
+  subset(select = -c(Chr, Start, End, Strand, Length))
+
+#change column names
+feature_counts = feature_counts %>%
+  setNames(c("gene_id","HER21", "HER22", "HER23","NonTNBC1", "NonTNBC2", "NonTNBC3", "Normal1", "Normal2", "Normal3", "TNBC1", "TNBC2", "TNBC3"))
+
+#create treatment conditions
+condition <- factor(c("HER2","HER2","HER2","NonTNBC", "NonTNBC", "NonTNBC", "Normal", "Normal", "Normal", "TNBC", "TNBC", "TNBC"))
+
+#create row-index out of first column
+feature_counts <- data.frame(feature_counts[,-1], row.names = feature_counts[,1])
+
+dds = DESeqDataSetFromMatrix(feature_counts, DataFrame(condition), ~ condition)
+dds = DESeq(dds)
+```
+
+## have a look at differential gene expression results
+```{r echo=TRUE}
+res = results(dds)
+head(results(dds, tidy = TRUE))
+summary(res)
+plotMA(res)
+```
+
+
+
+
+## regularized log transform and create PCA plot
+```{r echo=TRUE}
+rld = rlog(dds, blind = FALSE)
+DESeq2::plotPCA(rld)
+```
+
+
+## heatmap plot
+```{r}
+library("pheatmap")
+select <- order(rowMeans(counts(dds,normalized=TRUE)),
+                decreasing=TRUE)[1:20]
+
+df <- as.data.frame(colData(dds)[,"condition"])
+
+rownames(df) = colnames((dds))
+
+pheatmap(assay(rld)[select,], cluster_rows=FALSE, show_rownames=FALSE, show_colnames = TRUE,
+         cluster_cols=FALSE, annotation_col=df)
+```
+
+
+
+## extracting contrast results
+```{r echo=TRUE}
+#look at up and down regulated genes using contrast (comparison of 2 conditions)
+res2 = results(dds, contrast = c("condition", "TNBC", "NonTNBC"), alpha = 0.05)
+summary(res2)
+
+
+normalized_counts = counts(dds, normalized = TRUE)
+head(normalized_counts)
+
+#human SPARC gene
+normalized_counts["ENSG00000113140",]
+
+#erbb2 receptor tyrosine kinase
+normalized_counts["ENSG00000141736",]
+
+#estrogen receptor1
+normalized_counts["ENSG00000091831",]
+```
+
+
+## volcano plot
+```{r echo=TRUE}
+library(EnhancedVolcano)
+res <- results(dds, contrast = c('condition','TNBC','NonTNBC'))
+
+res <- lfcShrink(dds, contrast = c('condition','TNBC','NonTNBC'), res=res, type = 'normal')
+
+EnhancedVolcano(res,
+    lab = rownames(res),
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    labSize = 5)
+
+```
+
+
+
+
